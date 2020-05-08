@@ -17,9 +17,6 @@ for (var i = 0; i < 7; i++) {
             count += 1;
             diff.push("Index "+b[i]);
             diff.push(count + "c");
-            if (count == 1) {
-                score += 0.5;
-            }
         }
         if (!i == 0 && i <= 3 && i >= 1) {
             count += 1;
@@ -43,6 +40,42 @@ for (var i = 0; i < 7; i++) {
 }
 
 console.log(diff);
+countPart1(icount1);
+countPart1(icount2);
+
 console.log("score "+score);
-console.log(icount1);
-console.log(icount2);
+
+//calculating score based on part1 
+function countPart1 ( inputs ) {
+    switch(inputs) {
+        case 1:
+            score += 1
+            break;
+        case 2:
+            score += 0.5
+            break;
+        case 2:
+            score += 0.25
+            break;
+        default:
+            score = 0
+    }
+}
+
+
+//calculating score based on part1 
+function countPart2 ( inputs ) {
+    switch(inputs) {
+        case 1:
+            score += 1
+            break;
+        case 2:
+            score += 0.5
+            break;
+        case 2:
+            score += 0.25
+            break;
+        default:
+            score = 0
+    }
+}

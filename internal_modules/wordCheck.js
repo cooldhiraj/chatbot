@@ -1,7 +1,7 @@
 
 //This function only check which is present or not
 //return array i.e 101001
-module.exports.wordCheck = function ( inputs ) {
+module.exports.wordCheck = async function ( inputs ) {
 
     var str = inputs;
 

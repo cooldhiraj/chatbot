@@ -1,5 +1,5 @@
 
-module.exports.ingCheck = function ( inputs ) {
+module.exports.ingCheck = async function ( inputs ) {
     const _ = require('lodash');
     //inputs => expecting string
 

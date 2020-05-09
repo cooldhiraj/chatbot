@@ -1,7 +1,7 @@
 
 //This function only check which is present or not
 //return array i.e 101001
-module.exports.wordIndexing = function ( inputs ) {
+module.exports.wordIndexing = async function ( inputs ) {
 
     var str = inputs;
 

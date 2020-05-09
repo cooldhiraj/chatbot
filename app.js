@@ -6,75 +6,33 @@ const _ = require('lodash');
 var BayesClassifier = require('bayes-classifier')
 var classifier = new BayesClassifier()
 
-var str = "am i doing my best";
-var strData0 = ['ing'];
-var strData1 = ['am', 'is', 'are'];
-var strData2 = ['i', 'he/she/it', 'we/you/they'];
+// Internal modules
+const iCheck = require('./internal_modules/ing');
+const wCheck = require('./internal_modules/wordCheck');
+const wIndexing = require('./internal_modules/wordIndexing');
+const dCheck = require('./internal_modules/depend');
 
-//spliting string to array
-var filter1 = str.split(' ');
+var str = "I am trying so hard";
+var PresentWordArray =[];
+var IndexWordArray =[];
+var score = 0;
 
-// finding word ending with ing
-var ing = filter1.filter(filter1 => filter1.endsWith(strData0));
+//calling method ing
+var valuesIng = iCheck.ingCheck(str);
+PresentWordArray.push(valuesIng[0][0]);
+IndexWordArray.push(valuesIng[1][0]);
 
-// Will log value in array ing
-var ingIndex = [];
-for (let value of ing) {
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-    //pushing ing elent occur
-    ingIndex.push(filter1.findIndex(element => element == value));
-}
+//calling method of word check
+var valuesCheck = wCheck.wordCheck(str);
+PresentWordArray = PresentWordArray.concat(valuesCheck);
 
-//spice array till ing
-var filter2 = filter1.splice(0, ingIndex[0]+1);
+//calling method of word indexing
+var valuesIndex = wIndexing.wordIndexing(str);
+IndexWordArray = IndexWordArray.concat(valuesIndex);
 
+//calling method of word depend score
+score = dCheck.depend(valuesCheck);     //passing word check index array
 
-var matrixArray =[];
-var matrixIndexArray =[];
-//creating array matrix with rule 2
-if (!_.isEmpty(filter2)) {
-    matrixArray.push(1);
-    matrixIndexArray.push(ingIndex[0])
-}else {
-    matrixArray.push(0);
-    matrixIndexArray.push(-1)
-}
-//creating array matrix with rule 2
-for (var i = 0; i < strData1.length; i++) {
-    if (filter2.includes(strData1[i])) {
-        matrixArray.push(1)
-        matrixIndexArray.push(filter2.lastIndexOf(strData1[i]));
-    }else {
-        matrixArray.push(0);
-        matrixIndexArray.push(-1);
-    }
-}
-
-//creating array matrix with rule 3
-//Level 2 indexing 
-var count = 0;
-for (var i = 0; i < strData2.length; i++) {
-    var arr = strData2[i].split('/');
-    for (var k = 0; k < arr.length; k++) {
-        count+=1;
-        if (filter2.includes(arr[k])) {
-            matrixArray.push(1);
-            matrixIndexArray.push(filter2.lastIndexOf(arr[k]));
-            count = 0;
-            break;
-        } else {
-            if (count == arr.length) {
-                count = 0;
-                matrixArray.push(0);
-                matrixIndexArray.push(-1);
-            }
-        }
-    }
-}
-
-console.log("Present "+matrixArray);
-console.log("Index "+matrixIndexArray);
-
-
-
-
+console.log(PresentWordArray);
+console.log(IndexWordArray);
+console.log(score);

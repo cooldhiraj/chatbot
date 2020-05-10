@@ -7,7 +7,7 @@ module.exports.wordCheck = async function ( inputs ) {
 
     var strArr = str.split(' ');
 
-    strRuleArr = ['am', 'is', 'are', 'i', 'he/she/it', 'we/you/they'];
+    strRuleArr = ['am', 'is', 'are', 'i', 'he/she/it', 'we/you/they/the'];
 
     var matrixArr = [];
     var count = 0;
@@ -29,6 +29,6 @@ module.exports.wordCheck = async function ( inputs ) {
             }
         }
     }
-
+   
     return matrixArr;
 }

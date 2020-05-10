@@ -1,12 +1,12 @@
-async function PresentContinousTense() {
+async function PresentContinousTense(inputs) {
 
     // Internal modules
     const iCheck = require('./internal_modules/ing');
     const wCheck = require('./internal_modules/wordCheck');
     const wIndexing = require('./internal_modules/wordIndexing');
-    const dCheck = require('./internal_modules/depend');
+    const sCheck = require('./internal_modules/score');
 
-    var str = "i am try so hard";
+    var str = inputs.toLowerCase();
     var PresentWordArray = [];
     var IndexWordArray = [];
     var score = 0;
@@ -25,12 +25,36 @@ async function PresentContinousTense() {
     IndexWordArray = IndexWordArray.concat(valuesIndex);
 
     //calling method of word depend score
-    score = await dCheck.depend(PresentWordArray);     //passing word check index array
+    score = await sCheck.score(PresentWordArray);     //passing word check index array
 
-    console.log(PresentWordArray);
-    console.log(IndexWordArray);
-    console.log(score);
+    // console.log(PresentWordArray);
+    // console.log(IndexWordArray);
+    // console.log("Final score "+(score*1.66).toFixed(2)+"/10");
+    return score*1.666667;
 
 }
 
-PresentContinousTense();
+
+async function callUpper() {
+    
+    //https://www.learngrammar.net/a/examples-of-present-continuous-tense
+    var strArr = [
+        'The poet is writing romantic poems'
+    ];
+
+    var scoreAverage = []
+    for (let value of strArr) {
+        s = await PresentContinousTense( value );
+        scoreAverage.push(s);
+    }
+
+    const _ = require('lodash');
+    var finalAverage = _.mean(scoreAverage);
+    console.log('confidence '+finalAverage.toFixed(2));
+}
+
+callUpper();
+
+
+
+

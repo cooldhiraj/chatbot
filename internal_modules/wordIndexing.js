@@ -7,7 +7,7 @@ module.exports.wordIndexing = async function ( inputs ) {
 
     var strArr = str.split(' ');
 
-    strRuleArr = ['am', 'is', 'are', 'i', 'he/she/it', 'we/you/they'];
+    strRuleArr = ['am', 'is', 'are', 'i', 'he/she/it', 'we/you/they/the'];
 
     var matrixIndexingArr = [];
     var count = 0;
